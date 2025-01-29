@@ -1,15 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProductReview.Configurations.Entities;
+using ProductReview.Data;
 
 namespace ProductReview.Data
 {
-    public class ProductReviewContext : DbContext
+    public class ProductReviewContext(DbContextOptions<ProductReviewContext> options) : IdentityDbContext<ProductReviewUser>(options)
     {
-        public ProductReviewContext(DbContextOptions<ProductReviewContext> options)
-            : base(options)
-        {
-        }
-
         public DbSet<ProductReview.Domain.Make> Make { get; set; } = default!;
         public DbSet<ProductReview.Domain.Model> Model { get; set; } = default!;
         public DbSet<ProductReview.Domain.Colour> Colour { get; set; } = default!;
